@@ -138,10 +138,15 @@ class JudgeDispatcher(DispatcherBase):
         else:
             code = self.submission.code
 
+        # Time limit coefficient by language (C++:Java:Python = 0.5:1:2).
+        # Other languages use default 1x (same as before).
+        coefficient = {"Python": 2, "Java": 1, "C++": 0.5}
+        time_limit_coef = coefficient.get(language, 1)
+
         data = {
             "language_config": sub_config["config"],
             "src": code,
-            "max_cpu_time": self.problem.time_limit,
+            "max_cpu_time": int(self.problem.time_limit * time_limit_coef),
             "max_memory": 1024 * 1024 * self.problem.memory_limit,
             "test_case_id": self.problem.test_case_id,
             "output": False,
