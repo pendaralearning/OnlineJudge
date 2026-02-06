@@ -140,7 +140,7 @@ class JudgeDispatcher(DispatcherBase):
 
         # Time limit coefficient by language (C++:Java:Python = 0.5:1:2).
         # Other languages use default 1x (same as before).
-        coefficient = {"Python": 2, "Java": 1, "C++": 0.5}
+        coefficient = {"Python3": 2, "Java": 1, "C++": 0.5}
         time_limit_coef = coefficient.get(language, 1)
 
         data = {
